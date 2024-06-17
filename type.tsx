@@ -41,11 +41,22 @@ export type Link = {
   linkCategory: LinkCategory[];
 };
 
-export type Params = {
-  name: string;
-  link: string;
-  icon: any;
-  page: string;
+export type Rapports = {
+  supplier: string;
+  type: string;
+  label: any;
+  creationDate: string;
+  user: string;
+  status: number;
+};
+
+export type Orders = {
+  supplier: string;
+  type: string;
+  label: any;
+  creationDate: string;
+  status: number;
+  for: string;
 };
 
 

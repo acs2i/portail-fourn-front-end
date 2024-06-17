@@ -82,7 +82,11 @@ const Input: React.FC<InputProps> = (props) => {
       props.orange ? "border-b-2 border-orange-400" : ""
     }
     ${props.gray ? "border-b-[1px] border-gray-300" : ""}
-    ${props.create ? "border border-gray-300 rounded-lg px-2 focus:ring-blue-500 focus:border-blue-500 mt-2" : ""}
+    ${
+      props.create
+        ? "border border-gray-300 rounded-lg px-2 focus:ring-blue-500 focus:border-blue-500 mt-2"
+        : ""
+    }
     ${
       props.disabled
         ? " bg-gray-200 rounded-md border border-white text-gray-500 italic px-3 cursor-not-allowed"
@@ -136,7 +140,7 @@ const Input: React.FC<InputProps> = (props) => {
           {props.placeholder}
         </option>
         {props.options?.map((option, i) => (
-          <option key={i} value={option.value} >
+          <option key={i} value={option.value}>
             {option.name}
           </option>
         ))}
@@ -144,7 +148,7 @@ const Input: React.FC<InputProps> = (props) => {
     ) : null;
 
   return (
-    <div className={`flex flex-col mt-3`}>
+    <div className="grid grid-cols-2 gap-4 items-center mt-3">
       <div>
         <label
           htmlFor={props.id}

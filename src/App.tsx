@@ -9,7 +9,6 @@ import LoginPage from "./pages/login/LoginPage";
 import Navbar from "./components/Navigation/Navbar";
 import SuppliersPage from "./pages/suppliers/SuppliersPage";
 import CreateProductPage from "./pages/product/CreateProductPage";
-import ParamsMenuPage from "./pages/params/ParamsMenuPage";
 import DraftPage from "./pages/draft/DraftPage";
 import AdminPage from "./pages/panel-admin/AdminPage";
 import CreateUserPage from "./pages/panel-admin/CreateUser";
@@ -17,8 +16,12 @@ import ProductList from "./pages/product/ProductList";
 import CreateGroupPage from "./pages/panel-admin/CreateGroup";
 import CreatedGroupPage from "./pages/panel-admin/CreatedGroup";
 import CalendarPage from "./pages/calendar/CalendarPage";
-import Chat from "./components/Shared/Chat";
-import Footer from "./components/Navigation/Footer";
+import RapportsList from "./pages/rapports/RapportsList";
+import ChangeSupplier from "./pages/suppliers/ChangeSuppliers";
+import OrdersList from "./pages/orders/OrdersList";
+import PropOrders from "./pages/orders/PropOrders";
+import Cadencement from "./pages/orders/Cadencement";
+
 
 // Composant PrivateRoute
 const PrivateRoute = ({ isAuth } : any) => {
@@ -54,8 +57,11 @@ function App() {
           {/* Routes privées */}
           <Route element={<PrivateRoute isAuth={isAuth} />}>
             <Route path="/" element={<Home />} />
-            <Route path="/product/edit" element={<CreateProductPage />} />
-            <Route path="/parameters" element={<ParamsMenuPage />} />
+            <Route path="/rapports" element={<RapportsList />} />
+            <Route path="/change-supplier" element={<ChangeSupplier />} />
+            <Route path="/orders" element={<OrdersList />} />
+            <Route path="/proposal_order" element={<PropOrders />} />
+            <Route path="/cadencement" element={<Cadencement />} />
             <Route path="/product" element={<ProductList />} />
             <Route path="/product/:id" element={<SingleProductPage />} />
             <Route path="/suppliers/suppliers-list" element={<SuppliersPage />} />
@@ -69,8 +75,6 @@ function App() {
           <Route path="*" element={<Navigate to={isAuth ? "/" : "/login"} />} />
         </Routes>
       </div>
-      {shouldShowNavbar && <Chat />}
-   
     </>
   );
 }

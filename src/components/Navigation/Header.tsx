@@ -2,12 +2,13 @@ import React from "react";
 import Button from "../FormElements/Button";
 
 interface headerProps {
-  title: string;
-  link: string;
-  btnTitle: string;
-  placeholder: string;
-  children: any;
-  height: any;
+  title?: string;
+  link?: string;
+  btnTitle?: string;
+  placeholder?: string;
+  children?: any;
+  height?: any;
+  search?: boolean;
 }
 
 export default function Header({
@@ -16,7 +17,8 @@ export default function Header({
   link,
   btnTitle,
   placeholder,
-  height
+  height,
+  search
 }: headerProps) {
   return (
     <div className="w-full bg-gray-100 p-4 relative overflow-hidden" style={{ height: height || 'auto' }}>
@@ -32,7 +34,7 @@ export default function Header({
       <div className="p-8 relative z-10">
         <h3 className="text-[35px] font-[800] text-gray-800">{title}</h3>
         <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-4">
+          {search &&  <div className="flex items-center gap-4">
             <div className="relative w-[400px]">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 cursor-pointer">
                 <svg
@@ -62,7 +64,7 @@ export default function Header({
             <Button size="small" blue to={link}>
               {btnTitle}
             </Button>
-          </div>
+          </div>}
           <div>{children}</div>
         </div>
       </div>
