@@ -1,9 +1,35 @@
 import React, { useState } from "react";
-
+import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { fr } from "date-fns/locale";
+import { Calendar, Plus, Trash2, XCircle } from "lucide-react";
 import Header from "../../components/Navigation/Header";
 
+// Enregistrer la locale française
+registerLocale("fr", fr);
+
+// Définir la locale française par défaut
+setDefaultLocale("fr");
+
 export default function Cadencement() {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+  const [dates, setDates] = useState<Date[]>([new Date()]);
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+
+  const handleAddDate = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault(); // Empêche la soumission du formulaire
+    setDates([...dates, new Date()]);
+  };
+
+  const handleDateChange = (index: number, date: Date) => {
+    const newDates = [...dates];
+    newDates[index] = date;
+    setDates(newDates);
+  };
+
+  const handleRemoveDate = (index: number) => {
+    const newDates = dates.filter((_, i) => i !== index);
+    setDates(newDates);
+  };
 
   return (
     <>
@@ -87,17 +113,73 @@ export default function Cadencement() {
                 <label className="text-sm font-bold text-gray-700 mb-0 w-[200px]">
                   Cadencement :
                 </label>
-                <div className="flex items-center gap-1">
-                 
-                  <button className="border border-green-500 w-[100px] rounded-md">
-                    1 semaine
-                  </button>
-                  <button className="border border-green-500 w-[100px] rounded-md">
-                    2 semaines
-                  </button>
-                  <button className="border border-green-500 w-[100px] rounded-md">
-                    1 mois
-                  </button>
+                <div className="flex gap-2">
+                  <div className="flex flex-col gap-2">
+                    {dates.map((date, index) => (
+                      <div
+                        key={index}
+                        className="relative flex items-center gap-2"
+                      >
+                        <div className="border border-gray-200 p-1 rounded-md flex items-center">
+                          <DatePicker
+                            selected={date}
+                            onChange={(newDate) =>
+                              handleDateChange(index, newDate!)
+                            }
+                            locale="fr"
+                            dateFormat="P"
+                            className="focus:outline-none focus:border-green-500"
+                          />
+                          <Calendar size={18} />
+                        </div>
+                        {index > 0 && (
+                          <button
+                            onClick={() => handleRemoveDate(index)}
+                            className="absolute right-[-25px] text-red-600"
+                          >
+                            <Trash2 size={15} />
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <button
+                      onClick={handleAddDate}
+                      className="border border-gray-500 bg-gray-200 py-1 px-1 text-gray-600 rounded-full mt-1"
+                    >
+                      <Plus size={15} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 ">
+                <label className="text-sm font-bold text-gray-700 mb-0 w-[200px]">
+                  Date de vente début :
+                </label>
+                <div className="flex gap-2">
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className="border border-gray-200 p-1 rounded-md flex items-center">
+                        <DatePicker
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
+                          locale="fr"
+                          dateFormat="P"
+                          className="focus:outline-none focus:border-green-500"
+                        />
+                      </div>
+                      <button className="border border-gray-500 p-1 rounded-md text-[12px]">
+                        1 semaine
+                      </button>
+                      <button className="border border-gray-500 p-1 rounded-md text-[12px]">
+                        2 semaines
+                      </button>
+                      <button className="border border-gray-500 p-1 rounded-md text-[12px]">
+                        1 mois
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </form>
