@@ -32,6 +32,11 @@ export default function Cadencement() {
     setDates(newDates);
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("submitted")
+  }
+
   return (
     <>
       <Header
@@ -42,9 +47,9 @@ export default function Cadencement() {
       <section className="w-full bg-white h-screen">
         <div className="p-3">
           <div className="w-full relative">
-            <form className="w-[50%] mx-auto flex flex-col gap-4 justify-center mt-5">
+            <form className="w-[50%] mx-auto flex flex-col gap-4 justify-center mt-5" onSubmit={handleSubmit}>
               <div className="flex items-center justify-end gap-3 mb-5">
-                <Button size="small" cancel>
+                <Button size="small" cancel type="button">
                   Annuler
                 </Button>
                 <Button size="small" green>

@@ -174,7 +174,6 @@ export const ORDERS: Orders[] = [
 ];
 
 
-
 export const SUPPLIERS: Suppliers[] = [
   {
     code: "ERCFGJ89",
