@@ -21,7 +21,7 @@ export default function Header({
   search
 }: headerProps) {
   return (
-    <div className="w-full bg-gray-100 p-4 relative overflow-hidden" style={{ height: height || 'auto' }}>
+    <div className={`w-full bg-gray-100 border-b-2 p-4 relative overflow-hidden`} style={{ height: height || 'auto' }}>
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -31,7 +31,7 @@ export default function Header({
           backgroundPosition: "center bottom -50px",
         }}
       ></div>
-      <div className="p-8 relative z-10">
+      <div className="h-full p-8 relative z-10">
         <h3 className="text-[35px] font-[800] text-gray-800">{title}</h3>
         <div className="flex flex-col gap-4">
           {search &&  <div className="flex items-center gap-4">

@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RAPPORTS } from "../../utils/index";
+import { ORDERS, ORDERS_LINKS, RAPPORTS } from "../../utils/index";
 import { FilePenLine } from "lucide-react";
 import Header from "../../components/Navigation/Header";
 
-export default function RapportsList() {
+export default function OrderTodo() {
   const navigate = useNavigate();
+  const [page, setPage] = useState("todo");
 
   return (
     <>
-      <Header title="Mes Raports" btnTitle="Rechercher" height="250px">
-        <div className="flex items-center justify-between mt-[80px]">
+      <Header title="Commandes à faire" height="250px">
+        <div className="mt-[50px] p-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <label className="text-sm font-bold mb-1 text-gray-700">
-                Code :
+                Filtre :
               </label>
               <select
                 name="pets"
@@ -31,7 +32,7 @@ export default function RapportsList() {
             </div>
             <div className="flex items-center gap-2">
               <label className="text-sm font-bold mb-1 text-gray-700">
-                Status :
+                Utilisateur :
               </label>
               <select
                 name="pets"
@@ -47,18 +48,19 @@ export default function RapportsList() {
           </div>
           <div className="flex items-center gap-2">
             <p className="text-[13px]">Nouvelle requête : </p>
-            <Link className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2" to="/sell-stock">
+            <Link to="/proposal_order" className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2">
               <FilePenLine size={15} />
-              Ventes et stock
+              Proposition commande
             </Link>
 
-            <Link className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2" to="/">
+            <Link to="/cadencement" className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2">
               <FilePenLine size={15} />
-              Commande en cours
+              Précommande candencement
             </Link>
           </div>
         </div>
       </Header>
+
       <section className="w-full bg-gray-100">
         <div className="bg-white">
           <div className="w-full relative bg-white">
@@ -86,18 +88,18 @@ export default function RapportsList() {
                 </tr>
               </thead>
               <tbody>
-                {RAPPORTS.map((rapport, i) => (
+                {ORDERS.map((order, i) => (
                   <tr
                     key={i}
                     className="bg-white cursor-pointer hover:bg-slate-200 capitalize text-[12px] text-gray-800 even:bg-gray-100 whitespace-nowrap border"
                     onClick={() => navigate(`/`)}
                   >
-                    <td className="px-6 py-2">{rapport.supplier}</td>
-                    <td className="px-6 py-2">{rapport.type}</td>
-                    <td className="px-6 py-2">{rapport.label}</td>
-                    <td className="px-6 py-2">{rapport.creationDate}</td>
-                    <td className="px-6 py-2">{rapport.user}</td>
-                    <td className="px-6 py-2">{rapport.status}</td>
+                    <td className="px-6 py-2">{order.supplier}</td>
+                    <td className="px-6 py-2">{order.type}</td>
+                    <td className="px-6 py-2">{order.label}</td>
+                    <td className="px-6 py-2">{order.creationDate}</td>
+                    <td className="px-6 py-2">{order.status}</td>
+                    <td className="px-6 py-2">{order.for}</td>
                   </tr>
                 ))}
               </tbody>

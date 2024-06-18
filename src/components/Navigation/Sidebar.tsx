@@ -25,7 +25,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="fixed h-screen w-[250px] bg-white flex flex-col gap-3 z-[300] border-r-[1px] border-gray-300">
+    <aside className="fixed h-screen w-[250px] bg-white flex flex-col gap-3 z-[300] border-r-[1px] border-green-600">
       <ul className="text-gray-600 flex flex-col gap-8 px-7 py-8 overflow-y-auto">
         {LINKS.map((categoryWrapper, categoryWrapperIndex) =>
           categoryWrapper.linkCategory.map((category, categoryIndex) => (

@@ -4,14 +4,14 @@ import { ORDERS, ORDERS_LINKS, RAPPORTS } from "../../utils/index";
 import { FilePenLine } from "lucide-react";
 import Header from "../../components/Navigation/Header";
 
-export default function OrderList() {
+export default function OrderInProgress() {
   const navigate = useNavigate();
   const [page, setPage] = useState("todo");
 
   return (
     <>
-      <Header title="Mes Commandes" height="300px">
-        <div className="h-[70px] bg-gray-100 border border-gray-300 rounded-md mt-[50px] p-3 flex items-center justify-between">
+      <Header title="Commandes en cours..." height="250px">
+        <div className="mt-[50px] p-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <label className="text-sm font-bold mb-1 text-gray-700">
@@ -48,12 +48,12 @@ export default function OrderList() {
           </div>
           <div className="flex items-center gap-2">
             <p className="text-[13px]">Nouvelle requête : </p>
-            <Link to="/proposal_order" className="bg-transparent border border-green-500 rounded-md text-[12px] text-green-600 py-1 px-2 flex items-center gap-2 hover:bg-green-500 hover:text-white">
+            <Link to="/proposal_order" className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2">
               <FilePenLine size={15} />
               Proposition commande
             </Link>
 
-            <Link to="/cadencement" className="bg-transparent border border-green-500 rounded-md text-[12px] text-green-600 py-1 px-2 flex items-center gap-2 hover:bg-green-500 hover:text-white">
+            <Link to="/cadencement" className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2">
               <FilePenLine size={15} />
               Précommande candencement
             </Link>
@@ -62,22 +62,7 @@ export default function OrderList() {
       </Header>
 
       <section className="w-full bg-gray-100">
-        <div className="flex items-center bg-white h-[60px]">
-          {ORDERS_LINKS.map((link, i) => (
-            <button
-              key={i}
-              className={`text-sm font-[600] w-[100px] h-full ${
-                page === link.page
-                  ? "text-green-600 border-t-2 border-l-2 border-r-2 border-green-600 bg-white border-b-2 border-b-white -mb-[1px] relative z-10 rounded-t-md"
-                  : "text-gray-600 border-t-2 border-transparent"
-              }`}
-              onClick={() => setPage(link.page)}
-            >
-              {link.name}
-            </button>
-          ))}
-        </div>
-        <div className="bg-white border-t-[2px] border-green-600">
+        <div className="bg-white">
           <div className="w-full relative bg-white">
             <table className="w-full text-left border-collapse">
               <thead className="border-y-[1px] border-gray-200 text-md font-[800] text-gray-700">

@@ -22,7 +22,7 @@ export default function Navbar() {
           </div>
         </div>
       </Drawer>
-      <nav className="w-full h-[60px] bg-white border-b-[1px] border-gray-300 px-6 fixed top-0 left-0 z-[400]">
+      <nav className="w-full h-[60px] bg-white border-b-[1px] border-green-600 px-6 fixed top-0 left-0 z-[400]">
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center gap-3">
             <div className="w-[40px] h-[30px]">

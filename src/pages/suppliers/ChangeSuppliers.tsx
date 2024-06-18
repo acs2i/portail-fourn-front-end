@@ -16,7 +16,7 @@ export default function ChangeSupplier() {
         height="300px"
       ></Header>
       <section className="w-full bg-white h-screen">
-        <div className="p-3 border-t-[2px] border-green-600">
+        <div className="p-3">
           <div className="w-full relative">
             <form className="w-[50%] mx-auto flex flex-col gap-4 justify-center mt-5">
               <div className="flex items-center gap-4">

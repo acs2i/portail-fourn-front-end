@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { fr } from "date-fns/locale";
 import { Calendar, Plus, Trash2, XCircle } from "lucide-react";
 import Header from "../../components/Navigation/Header";
+import Button from "../../components/FormElements/Button";
 
 // Enregistrer la locale française
 registerLocale("fr", fr);
@@ -39,9 +40,17 @@ export default function Cadencement() {
         height="300px"
       ></Header>
       <section className="w-full bg-white h-screen">
-        <div className="p-3 border-t-[2px] border-green-600">
+        <div className="p-3">
           <div className="w-full relative">
             <form className="w-[50%] mx-auto flex flex-col gap-4 justify-center mt-5">
+              <div className="flex items-center justify-end gap-3 mb-5">
+                <Button size="small" cancel>
+                  Annuler
+                </Button>
+                <Button size="small" green>
+                  Valider
+                </Button>
+              </div>
               <div className="flex items-center gap-4">
                 <label className="text-sm font-bold text-gray-700 mb-0 w-[200px]">
                   Fournisseur :
@@ -136,6 +145,7 @@ export default function Cadencement() {
                           <button
                             onClick={() => handleRemoveDate(index)}
                             className="absolute right-[-25px] text-red-600"
+                            type="button"
                           >
                             <Trash2 size={15} />
                           </button>
@@ -147,6 +157,7 @@ export default function Cadencement() {
                     <button
                       onClick={handleAddDate}
                       className="border border-gray-500 bg-gray-200 py-1 px-1 text-gray-600 rounded-full mt-1"
+                      type="button"
                     >
                       <Plus size={15} />
                     </button>
@@ -169,13 +180,22 @@ export default function Cadencement() {
                           className="focus:outline-none focus:border-green-500"
                         />
                       </div>
-                      <button className="border border-gray-500 p-1 rounded-md text-[12px]">
+                      <button
+                        className="border border-gray-500 p-1 rounded-md text-[12px]"
+                        type="button"
+                      >
                         1 semaine
                       </button>
-                      <button className="border border-gray-500 p-1 rounded-md text-[12px]">
+                      <button
+                        className="border border-gray-500 p-1 rounded-md text-[12px]"
+                        type="button"
+                      >
                         2 semaines
                       </button>
-                      <button className="border border-gray-500 p-1 rounded-md text-[12px]">
+                      <button
+                        className="border border-gray-500 p-1 rounded-md text-[12px]"
+                        type="button"
+                      >
                         1 mois
                       </button>
                     </div>

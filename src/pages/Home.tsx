@@ -55,7 +55,7 @@ export default function Home() {
             <div className="flex items-end">
               <Link
                 className="bg-green-600 w-full text-white py-1 rounded-md text-center hover:bg-green-400"
-                to="/orders"
+                to="/orders-todo"
               >
                 Commandes
               </Link>

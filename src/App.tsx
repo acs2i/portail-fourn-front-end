@@ -3,28 +3,20 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Home from "./pages/Home";
-import SingleProductPage from "./pages/product/SingleProductPage";
 import Sidebar from "./components/Navigation/Sidebar";
 import LoginPage from "./pages/login/LoginPage";
 import Navbar from "./components/Navigation/Navbar";
-import SuppliersPage from "./pages/suppliers/SuppliersPage";
-import CreateProductPage from "./pages/product/CreateProductPage";
-import DraftPage from "./pages/draft/DraftPage";
-import AdminPage from "./pages/panel-admin/AdminPage";
-import CreateUserPage from "./pages/panel-admin/CreateUser";
-import ProductList from "./pages/product/ProductList";
-import CreateGroupPage from "./pages/panel-admin/CreateGroup";
-import CreatedGroupPage from "./pages/panel-admin/CreatedGroup";
-import CalendarPage from "./pages/calendar/CalendarPage";
 import RapportsList from "./pages/rapports/RapportsList";
 import ChangeSupplier from "./pages/suppliers/ChangeSuppliers";
-import OrdersList from "./pages/orders/OrdersList";
+import OrderTodo from "./pages/orders/OrdersTodo";
 import PropOrders from "./pages/orders/PropOrders";
 import Cadencement from "./pages/orders/Cadencement";
-
+import OrderInProgress from "./pages/orders/OrdersInProgress";
+import OrderDone from "./pages/orders/OrdersDone";
+import SellStock from "./pages/sell/SellStock";
 
 // Composant PrivateRoute
-const PrivateRoute = ({ isAuth } : any) => {
+const PrivateRoute = ({ isAuth }: any) => {
   return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };
 
@@ -59,18 +51,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/rapports" element={<RapportsList />} />
             <Route path="/change-supplier" element={<ChangeSupplier />} />
-            <Route path="/orders" element={<OrdersList />} />
+            <Route path="/orders-todo" element={<OrderTodo />} />
+            <Route path="/orders-progress" element={<OrderInProgress />} />
+            <Route path="/orders-done" element={<OrderDone />} />
             <Route path="/proposal_order" element={<PropOrders />} />
+            <Route path="/sell-stock" element={<SellStock />} />
             <Route path="/cadencement" element={<Cadencement />} />
-            <Route path="/product" element={<ProductList />} />
-            <Route path="/product/:id" element={<SingleProductPage />} />
-            <Route path="/suppliers/suppliers-list" element={<SuppliersPage />} />
-            <Route path="/draft" element={<DraftPage />} />
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/admin/create-user" element={<CreateUserPage />} />
-            <Route path="/admin/create-group" element={<CreateGroupPage />} />
-            <Route path="/admin/created-group" element={<CreatedGroupPage />} />
-            <Route path="/calendar" element={<CalendarPage />} />
           </Route>
           <Route path="*" element={<Navigate to={isAuth ? "/" : "/login"} />} />
         </Routes>

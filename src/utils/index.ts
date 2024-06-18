@@ -23,6 +23,8 @@ import {
   SquarePen,
   User,
   Home,
+  FilePenLine,
+  FolderOpen,
 } from "lucide-react";
 
 export const LINKS: Link[] = [
@@ -38,36 +40,34 @@ export const LINKS: Link[] = [
             icon: Home,
           },
           {
-            name: "Articles",
-            linksGroup: [
-              {
-                name: "Liste des articles",
-                link: "/product",
-              },
-              {
-                name: "Créer un article",
-                link: "/product/edit",
-              },
-            ],
-            icon: Shirt,
-          },
-          {
-            name: "Codifications",
-            link: "/parameters",
-            linksGroup: [],
-            icon: Settings2,
-          },
-          {
-            name: "Fournisseurs",
-            link: "/suppliers/suppliers-list",
+            name: "Fournisseur",
+            link: "/change-supplier",
             linksGroup: [],
             icon: Factory,
           },
           {
-            name: "Calendrier",
-            link: "/calendar",
+            name: "Rapports",
+            link: "/rapports",
             linksGroup: [],
-            icon: CalendarDays,
+            icon: FolderOpen,
+          },
+          {
+            name: "Commandes",
+            linksGroup: [
+              {
+                name: "Todo",
+                link: "/orders-todo",
+              },
+              {
+                name: "En cours",
+                link: "/orders-progress",
+              },
+              {
+                name: "Finalisés",
+                link: "/orders-done",
+              },
+            ],
+            icon: FilePenLine,
           },
         ],
       },
