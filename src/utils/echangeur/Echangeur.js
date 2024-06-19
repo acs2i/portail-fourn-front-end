@@ -1,5 +1,5 @@
 const EchangeurLog = [{}, {}, {}, {}, {}, {}];
-const webDbName = "https://esifly.fr/cors.php?url=http://192.168.10.111:3010/";
+const webDbName = "http://192.168.10.111:3010/";
 const webUrlAgent = "echangeur";
 class Action {
   constructor(fonction, parametres, i, o, d) {
@@ -148,9 +148,7 @@ class Echangeur {
   }
 
   async runAsync(param) {
-    console.log("Starting runAsync...");
     if (!this.actions.length) {
-      console.log("No actions to run.");
       return;
     }
     if (this.erreur) delete this.erreur;
@@ -162,7 +160,7 @@ class Echangeur {
     let p3 = "t" + new Date().getTime();
 
     const echangeur = this.clone();
-    console.log("Cloned echangeur:", echangeur);
+  
 
     if (echangeur.actions.length) {
       const baseUrl = webDbName + webUrlAgent;
@@ -171,7 +169,6 @@ class Echangeur {
 
       if (echangeur.formData) {
         const formData = echangeur.formData;
-        console.log("Echangeur formdata");
         for (var [key, value] of formData.entries()) {
           console.log(key, value);
         }
@@ -196,8 +193,6 @@ class Echangeur {
         };
       }
 
-      console.log("URL:", url);
-      console.log("Settings:", settings);
 
       let fetchResponse;
       try {

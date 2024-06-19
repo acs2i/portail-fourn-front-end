@@ -4,36 +4,90 @@ import { RAPPORTS } from "../../utils/index";
 import { FilePenLine } from "lucide-react";
 import Header from "../../components/Navigation/Header";
 import { useEchangeur } from "../../utils/providers/EchangeurContext";
+import moment from "moment";
+
+interface Rapport {
+  fournisseurKV: string;
+  typeKAff: string;
+  requeteV: string;
+  dateCre: string;
+  wfv: string;
+  quiFromTo: string;
+  [key: string]: any; 
+}
+
+interface Data {
+  rows: Rapport[];
+  nb: number;
+}
+
+const buildData = (data: Data) => {
+  const rows = data.rows.map((x) => {
+    if (x.datdeb && x.datfin) {
+      const datdeb = moment(x.datdeb).format("DD-MMM-YYYY");
+      const datfin = moment(x.datfin).format("DD-MMM-YYYY");
+      x.requeteV = `${x.requeteV} (${datdeb} au ${datfin})`;
+    }
+
+    return {
+      ...x,
+      fournisseurKV: `${x.fournisseurK} ${x.fournisseurV}`,
+      typeKAff: `${x.requeteK} ${x.numeroAff}`,
+      quiFromTo: `${x.from} => ${x.to}`,
+    };
+  });
+
+  return { rows, nb: data.nb };
+};
+
 
 export default function RapportsList() {
   const navigate = useNavigate();
   const { echangeur } = useEchangeur();
-  const [rapports, setRapports] = useState([]);
-  const [error, setError] = useState(null);
-
-  const fetchReports = async () => {
-    try {
-      const response = await fetch(
-        `http://192.168.10.111:3010/echangeur/format=json&time=1718789727400`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const data = await response.json();
-      setRapports(data);
-    } catch (error) {
-      console.error("Erreur lors de la requête", error);
-    } finally {
-    }
-  };
+  const [rapports, setRapports] = useState<Rapport[]>([]);
+  const [filteredRapports, setFilteredRapports] = useState<Rapport[]>([]);
+  const [searchKey, setSearchKey] = useState<string>("");
+  const [currentSort, setCurrentSort] = useState<string>("");
+  const [sortDirection, setSortDirection] = useState<number>(-1);
 
   useEffect(() => {
-    fetchReports();
-  }, []);
+    const fetchData = async () => {
+      console.log("fetchData");
+      try {
+        if (!echangeur.hash) {
+          echangeur.hash = {};
+        }
+        if (!echangeur.hash.dossier) {
+          echangeur.hash.dossier = 'todo';
+        }
+
+        echangeur.addAction('sessionInfo', {}, 'form', 'session');
+        echangeur.addAction('requete.workflow.list', echangeur.hash, '', 'data');
+
+        const result = await echangeur.runAsync();
+        console.log('Echangeur actions completed', result);
+
+        if (result) {
+          const data = result.get('data');
+          console.log('Data received:', data);
+
+          if (data) {
+            const items = buildData(data);
+            setRapports(items.rows);
+            setFilteredRapports(items.rows);
+          } else {
+            console.error('No data found in result object.');
+          }
+        } else {
+          console.error('Result is null or undefined.');
+        }
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchData();
+  }, [echangeur]);
 
   return (
     <>
