@@ -47,42 +47,37 @@ export default function RapportsList() {
   const [rapports, setRapports] = useState<Rapport[]>([]);
   const [filteredRapports, setFilteredRapports] = useState<Rapport[]>([]);
   const [searchKey, setSearchKey] = useState<string>("");
-  const [currentSort, setCurrentSort] = useState<string>("");
-  const [sortDirection, setSortDirection] = useState<number>(-1);
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("fetchData");
       try {
         if (!echangeur.hash) {
           echangeur.hash = {};
         }
         if (!echangeur.hash.dossier) {
-          echangeur.hash.dossier = 'todo';
+          echangeur.hash.dossier = "todo";
         }
 
-        echangeur.addAction('sessionInfo', {}, 'form', 'session');
         echangeur.addAction('requete.workflow.list', echangeur.hash, '', 'data');
 
         const result = await echangeur.runAsync();
-        console.log('Echangeur actions completed', result);
 
         if (result) {
-          const data = result.get('data');
-          console.log('Data received:', data);
+          const data = result.get("data");
+          console.log("Data received:", data);
 
           if (data) {
             const items = buildData(data);
             setRapports(items.rows);
             setFilteredRapports(items.rows);
           } else {
-            console.error('No data found in result object.');
+            console.error("No data found in result object.");
           }
         } else {
-          console.error('Result is null or undefined.');
+          console.error("Result is null or undefined.");
         }
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error("Failed to fetch data:", error);
       }
     };
 

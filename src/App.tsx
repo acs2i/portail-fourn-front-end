@@ -47,7 +47,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
 
           {/* Routes privées */}
-          <Route element={<PrivateRoute isAuth={isAuth} />}>
+       
             <Route path="/" element={<Home />} />
             <Route path="/rapports" element={<RapportsList />} />
             <Route path="/change-supplier" element={<ChangeSupplier />} />
@@ -57,7 +57,7 @@ function App() {
             <Route path="/proposal_order" element={<PropOrders />} />
             <Route path="/sell-stock" element={<SellStock />} />
             <Route path="/cadencement" element={<Cadencement />} />
-          </Route>
+      
           <Route path="*" element={<Navigate to={isAuth ? "/" : "/login"} />} />
         </Routes>
       </div>

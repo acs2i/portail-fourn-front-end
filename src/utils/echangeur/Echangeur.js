@@ -1,5 +1,5 @@
 const EchangeurLog = [{}, {}, {}, {}, {}, {}];
-const webDbName = "http://192.168.10.111:3010/";
+const webDbName = "http://192.168.10.111:3011/";
 const webUrlAgent = "echangeur";
 class Action {
   constructor(fonction, parametres, i, o, d) {
@@ -160,7 +160,7 @@ class Echangeur {
     let p3 = "t" + new Date().getTime();
 
     const echangeur = this.clone();
-  
+    echangeur.name = "getData"
 
     if (echangeur.actions.length) {
       const baseUrl = webDbName + webUrlAgent;
