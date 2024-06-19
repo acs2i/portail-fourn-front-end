@@ -1,11 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RAPPORTS } from "../../utils/index";
 import { FilePenLine } from "lucide-react";
 import Header from "../../components/Navigation/Header";
+import { useEchangeur } from "../../utils/providers/EchangeurContext";
 
 export default function RapportsList() {
   const navigate = useNavigate();
+  const { echangeur } = useEchangeur();
+  const [rapports, setRapports] = useState([]);
+  const [error, setError] = useState(null);
+
+  const fetchReports = async () => {
+    try {
+      const response = await fetch(
+        `http://192.168.10.111:3010/echangeur/format=json&time=1718789727400`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+      setRapports(data);
+    } catch (error) {
+      console.error("Erreur lors de la requête", error);
+    } finally {
+    }
+  };
+
+  useEffect(() => {
+    fetchReports();
+  }, []);
 
   return (
     <>
@@ -47,12 +75,18 @@ export default function RapportsList() {
           </div>
           <div className="flex items-center gap-2">
             <p className="text-[13px]">Nouvelle requête : </p>
-            <Link className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2" to="/sell-stock">
+            <Link
+              className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2"
+              to="/sell-stock"
+            >
               <FilePenLine size={15} />
               Ventes et stock
             </Link>
 
-            <Link className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2" to="/">
+            <Link
+              className="bg-green-600 border border-green-500 rounded-md text-[12px] text-white py-2 px-2 flex items-center gap-2"
+              to="/"
+            >
               <FilePenLine size={15} />
               Commande en cours
             </Link>
